@@ -1,454 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For Shajid</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter For You, Shajid</title>
     <style>
-      :root {
-        --bg-1: #120d18;
-        --bg-2: #1b1224;
-        --panel: rgba(27, 18, 36, 0.72);
-        --gold: #f7d77b;
-        --gold-soft: #f3c76b;
-        --rose: #ff6fa6;
-        --text: #f8f3ea;
-        --muted: #d6c9b5;
-        --shadow: rgba(0, 0, 0, 0.5);
-      }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@400;600;700&display=swap');
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html, body {
-        margin: 0;
-        min-height: 100%;
-        font-family: Georgia, "Times New Roman", serif;
-        background: radial-gradient(circle at top, #261b2e 0%, var(--bg-1) 35%, var(--bg-2) 100%);
-        color: var(--text);
-        scroll-behavior: smooth;
-      }
-
-      body {
-        overflow-x: hidden;
-      }
-
-      .page {
-        position: relative;
-        min-height: 100vh;
-        padding: 24px 18px 80px;
-      }
-
-      .glow, .glow-2 {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        opacity: 0.35;
-        pointer-events: none;
-      }
-
-      .glow {
-        width: 280px;
-        height: 280px;
-        background: rgba(247, 215, 123, 0.25);
-        top: 10%;
-        left: -40px;
-      }
-
-      .glow-2 {
-        width: 320px;
-        height: 320px;
-        background: rgba(255, 111, 166, 0.2);
-        right: -50px;
-        bottom: 10%;
-      }
-
-      .container {
-        max-width: 1000px;
-        position: relative;
-        z-index: 1;
-        margin: 0 auto;
-      }
-
-      .cover {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 40px 0;
-      }
-
-      .cover-card {
-        width: min(92vw, 760px);
-        padding: 40px 24px;
-        background: rgba(18, 13, 24, 0.5);
-        border: 1px solid rgba(247, 215, 123, 0.35);
-        border-radius: 28px;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
-        backdrop-filter: blur(8px);
-      }
-
-      .tag {
-        display: inline-block;
-        color: var(--gold);
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        font-size: 11px;
-        margin-bottom: 14px;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.8rem, 7vw, 5.5rem);
-        line-height: 0.98;
-        color: #fffaf0;
-        text-shadow: 0 0 30px rgba(247, 215, 123, 0.28);
-      }
-
-      .subtitle {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: clamp(1rem, 2vw, 1.3rem);
-      }
-
-      .open-btn {
-        appearance: none;
-        border: none;
-        margin-top: 28px;
-        background: linear-gradient(135deg, var(--gold) 0%, #f3c76b 50%, #d9a14b 100%);
-        color: #201914;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        border-radius: 999px;
-        padding: 16px 34px;
-        font-size: 0.92rem;
-        cursor: pointer;
-        box-shadow: 0 18px 35px rgba(247, 215, 123, 0.25);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      .open-btn:hover {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 20px 45px rgba(247, 215, 123, 0.35);
-      }
-
-      .section {
-        opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
-      }
-
-      .section.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .gift-boxes {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-        gap: 18px;
-        margin-top: 40px;
-      }
-
-      .gift-card {
-        background: var(--panel);
-        border: 1px solid rgba(247, 215, 123, 0.18);
-        border-radius: 24px;
-        padding: 22px 18px 18px;
-        text-align: center;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
-      }
-
-      .gift-icon {
-        font-size: 2.8rem;
-        margin-bottom: 14px;
-      }
-
-      .gift-card h3 {
-        margin: 0 0 10px;
-        color: var(--gold);
-        font-size: 1.35rem;
-      }
-
-      .gift-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.7;
-        font-size: 0.95rem;
-      }
-
-      .letter {
-        margin-top: 52px;
-        background: rgba(22, 16, 27, 0.7);
-        border: 1px solid rgba(247, 215, 123, 0.2);
-        border-radius: 28px;
-        padding: 22px;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-      }
-
-      .letter h2 {
-        text-align: center;
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        color: var(--gold);
-        margin: 0 0 16px;
-      }
-
-      .letter p {
-        color: #f4eede;
-        line-height: 1.9;
-        margin: 0 0 18px;
-        font-size: clamp(1rem, 2vw, 1.15rem);
-        text-align: justify;
-      }
-
-      .quote {
-        margin-top: 26px;
-        padding: 26px 22px;
-        border-left: 3px solid var(--gold);
-        background: rgba(247, 215, 123, 0.06);
-        border-radius: 16px;
-        color: #f4e3b7;
-        font-style: italic;
-        font-size: 1.05rem;
-      }
-
-      .music-box {
-        margin-top: 52px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
-      }
-
-      .music-btn {
-        border: 1px solid rgba(247, 215, 123, 0.4);
-        background: rgba(247, 215, 123, 0.06);
-        color: var(--gold);
-        border-radius: 999px;
-        padding: 14px 20px;
-        cursor: pointer;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .note {
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      .final-card {
-        margin-top: 46px;
-        background: linear-gradient(135deg, rgba(247, 215, 123, 0.12), rgba(255, 111, 166, 0.08));
-        border: 1px solid rgba(247, 215, 123, 0.32);
-        border-radius: 28px;
-        padding: 28px 20px;
-        text-align: center;
-      }
-
-      .final-card h3 {
-        font-size: clamp(2rem, 5vw, 3.2rem);
-        margin: 0;
-        color: #fff5d7;
-      }
-
-      .final-card p {
-        margin: 16px auto 0;
-        max-width: 700px;
-        color: var(--muted);
-        font-size: 1.05rem;
-        line-height: 1.8;
-      }
-
-      .heart-wrap {
-        margin-top: 30px;
-        font-size: 3rem;
-        animation: pulse 1.4s infinite ease-in-out;
-      }
-
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.18); opacity: 0.9; }
-      }
-
-      .floating-hearts {
-        position: fixed;
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .heart {
-        position: absolute;
-        bottom: -10vh;
-        font-size: 20px;
-        color: rgba(255, 111, 166, 0.8);
-        animation: floatUp linear forwards;
-      }
-
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) scale(0.7) rotate(0deg);
-          opacity: 0;
-        }
-        15% { opacity: 1; }
-        100% {
-          transform: translateY(-115vh) scale(1.3) rotate(20deg);
-          opacity: 0;
-        }
-      }
-
-      @media (max-width: 580px) {
-        .cover-card {
-          padding: 28px 18px;
+        :root {
+            --dark-bg: #0a0609;
+            --dark-panel: #1a1420;
+            --gold-primary: #d4af37;
+            --gold-light: #f4e4c1;
+            --rose-accent: #e63946;
+            --cream: #faf9f6;
+            --text-primary: #f5f1eb;
+            --text-secondary: #d4c9bd;
+            --shadow-lg: 0 40px 100px rgba(0,0,0,0.6);
+            --shadow-md: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        .letter {
-          padding: 18px 14px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .gift-card {
-          padding: 18px 14px;
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1f1829 50%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-      }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--gold-primary) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--rose-accent) 0%, transparent 70%);
+            bottom: -50px;
+            right: -50px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Page Sections */
+        .page-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .page-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cover Section */
+        .cover-section {
+            text-align: center;
+            animation: fadeInScale 1.2s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .cover-badge {
+            display: inline-block;
+            color: var(--gold-primary);
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease 0.2s backwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--cream);
+            text-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            margin-bottom: 15px;
+            animation: slideDown 1s ease 0.4s backwards;
+        }
+
+        .cover-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            animation: slideDown 1s ease 0.6s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #c9a961 100%);
+            color: var(--dark-bg);
+            padding: 18px 50px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid var(--gold-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+            animation: slideDown 1s ease 0.8s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 70px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #c9a961 0%, var(--gold-primary) 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Gift Boxes Section */
+        .gift-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--cream);
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .gift-box {
+            background: rgba(26, 20, 32, 0.7);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 40px 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .gift-box:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
+        }
+
+        .gift-box:hover::before {
+            opacity: 1;
+        }
+
+        .gift-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .gift-box:nth-child(1) .gift-icon { animation-delay: 0s; }
+        .gift-box:nth-child(2) .gift-icon { animation-delay: 0.2s; }
+        .gift-box:nth-child(3) .gift-icon { animation-delay: 0.4s; }
+        .gift-box:nth-child(4) .gift-icon { animation-delay: 0.6s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .gift-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold-primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .gift-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .letter-container {
+            background: linear-gradient(135deg, rgba(26, 20, 32, 0.85) 0%, rgba(31, 24, 41, 0.85) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 30px;
+        }
+
+        .letter-greeting {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .letter-date {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .letter-body {
+            line-height: 2;
+            color: var(--text-primary);
+        }
+
+        .letter-body p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.05rem;
+            text-indent: 2em;
+        }
+
+        .letter-body p:first-letter {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gold-primary);
+        }
+
+        .highlight-quote {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold-primary);
+            padding: 25px 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #f4e4c1;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .letter-signature {
+            margin-top: 40px;
+            text-align: right;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .signature-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-primary);
+            margin-bottom: 5px;
+        }
+
+        .signature-msg {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Confession Modal */
+        .confession-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 6, 9, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .confession-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .confession-card {
+            background: linear-gradient(135deg, #1a1420 0%, #2a1a35 100%);
+            border: 2px solid var(--gold-primary);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 50px 150px rgba(212, 175, 55, 0.4);
+            animation: confessionPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes confessionPop {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotateX(-20deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateX(0);
+            }
+        }
+
+        .confession-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 0.8s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .confession-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--cream);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .confession-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .response-btn {
+            padding: 14px 32px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid var(--gold-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .response-btn.yes {
+            background: var(--gold-primary);
+            color: var(--dark-bg);
+        }
+
+        .response-btn.yes:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .response-btn.think {
+            background: transparent;
+            color: var(--gold-primary);
+        }
+
+        .response-btn.think:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Celebration Screen */
+        .celebration {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            pointer-events: none;
+            display: none;
+        }
+
+        .celebration.active {
+            display: block;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold-primary);
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: rgba(26, 20, 32, 0.9);
+            border: 2px solid var(--gold-primary);
+            border-radius: 50px;
+            padding: 12px 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .music-icon {
+            font-size: 1.5rem;
+            animation: musicBeat 0.6s ease-in-out infinite;
+        }
+
+        @keyframes musicBeat {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.3); }
+        }
+
+        .music-toggle {
+            background: transparent;
+            border: none;
+            color: var(--gold-primary);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            color: var(--cream);
+        }
+
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 30px 20px;
+            }
+
+            .letter-body p {
+                text-indent: 1.5em;
+                font-size: 1rem;
+            }
+
+            .confession-card {
+                padding: 30px 20px;
+            }
+
+            .music-player {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+
+            .gift-grid {
+                gap: 20px;
+            }
+
+            .gift-box {
+                padding: 25px 15px;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            animation: bounce 1.5s ease-in-out infinite;
+            color: var(--gold-primary);
+        }
+
+        .scroll-indicator.hidden {
+            display: none;
+        }
     </style>
-  </head>
-  <body>
-    <div class="floating-hearts" id="floating-hearts"></div>
-
-    <div class="page">
-      <div class="glow"></div>
-      <div class="glow-2"></div>
-
-      <div class="container">
-        <section class="cover section visible" id="cover">
-          <div class="cover-card">
-            <div class="tag">A little surprise for you</div>
-            <h1>For Shajid</h1>
-            <div class="subtitle">A tiny universe of feelings, memories, and hope.</div>
-            <button class="open-btn" onclick="scrollToGift()">Open My Gift</button>
-          </div>
-        </section>
-
-        <section class="section" id="gift-section">
-          <div class="gift-boxes">
-            <div class="gift-card">
-              <div class="gift-icon">💌</div>
-              <h3>Love Letter</h3>
-              <p>Words I kept inside for years, finally spoken honestly.</p>
-            </div>
-            <div class="gift-card">
-              <div class="gift-icon">✨</div>
-              <h3>Secret Crush</h3>
-              <p>One truth I could never hide anymore — you are unforgettable.</p>
-            </div>
-            <div class="gift-card">
-              <div class="gift-icon">🎁</div>
-              <h3>Little Surprise</h3>
-              <p>A memory box of feelings, admiration, and quiet hope.</p>
-            </div>
-            <div class="gift-card">
-              <div class="gift-icon">🌙</div>
-              <h3>Late Night Thoughts</h3>
-              <p>All the moments I imagined, all the dreams I kept to myself.</p>
-            </div>
-          </div>
-
-          <div class="letter">
-            <h2>Dear Shajid,</h2>
-            <p>I've been writing this letter in my head for three years. Since class 12th, you've been living in my thoughts — uninvited, but so very welcome.</p>
-
-            <p>Do you know what it feels like to control yourself so much that it hurts? I do. Every single day, I tell myself to just look away, to focus on something else, to pretend you don't exist. But the moment I see you nearby, all that control just... breaks.</p>
-
-            <p>My eyes are not my own anymore, Shajid. They're always looking for you. They're always finding you in a crowded room. It doesn't matter how hard I try — they're drawn to you like moths to light.</p>
-
-            <p>And when you're close to me? My heartbeats go crazy. Thump thump thump. So fast I think everyone can hear it. I have to control my breathing just to appear normal. My hands get cold, my mind goes blank, and all I can think about is you. Just you.</p>
-
-            <p>But then there's this feeling I get when I'm around you — a peace that's unlike anything I've ever felt. It's like coming home. It's like all the chaos in my world suddenly makes sense. Like all the pieces fit together perfectly. I've never felt this way about anyone, no matter how hard I looked.</p>
-
-            <p>I've lived 3+ years of my life with this secret. I've spent so many nights thinking about what to say, how to say it, whether you could ever feel even a fraction of what I feel. And today, on this day dedicated to celebrating the men we love, I couldn't keep it inside anymore.</p>
-
-            <p>Shajid, I have had a crush on you for the past three years. And it's not just a silly crush — it's deep, real, and it grows with every passing day.</p>
-
-            <p>I don't know what you'll say. I don't know if you feel the same way. But I know that you deserve to know the truth. You deserve to know that someone looks at you the way I do — with admiration, affection, and a heart that's completely, helplessly yours.</p>
-
-            <div class="quote">“Maybe I was afraid to say it before, but now I am brave enough to let you know — you are the one I think about most, and the one I wish to keep close forever.”</div>
-          </div>
-
-          <div class="music-box">
-            <button class="music-btn" onclick="toggleMusic()" id="musicBtn">Play Soft Music</button>
-            <div class="note">A little mood for the moment.</div>
-          </div>
-
-          <div class="final-card">
-            <div class="heart-wrap">💛</div>
-            <h3>Happy Day, Shajid</h3>
-            <p>You are the kind of person that quietly becomes a favorite thought. My heart is not the easiest thing to give away, but somehow it has already chosen you.</p>
-          </div>
-        </section>
-      </div>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
     </div>
 
-    <audio id="loveSong" loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- COVER SECTION -->
+        <section class="page-section cover-section active">
+            <div>
+                <div class="cover-badge">✨ A Special Moment</div>
+                <h1 class="cover-title">For You, Shajid</h1>
+                <p class="cover-subtitle">Three years of words I kept inside. Today, I finally set them free.</p>
+                <button class="cta-button" onclick="nextSection()">Start Reading →</button>
+                <div class="scroll-indicator" id="scrollIndicator">↓</div>
+            </div>
+        </section>
+
+        <!-- GIFTS SECTION -->
+        <section class="page-section gift-section" id="giftsSection">
+            <h2 class="section-title">Your Gifts</h2>
+            <div class="gift-grid">
+                <div class="gift-box">
+                    <div class="gift-icon">💌</div>
+                    <h3 class="gift-title">Love Letter</h3>
+                    <p class="gift-desc">Three years of feelings, finally written with the courage of truth.</p>
+                </div>
+                <div class="gift-box">
+                    <div class="gift-icon">✨</div>
+                    <h3 class="gift-title">My Confession</h3>
+                    <p class="gift-desc">A secret crush that became impossible to hide anymore.</p>
+                </div>
+                <div class="gift-box">
+                    <div class="gift-icon">🌙</div>
+                    <h3 class="gift-title">Late Night Thoughts</h3>
+                    <p class="gift-desc">Every moment you stayed in my mind, every dream you filled.</p>
+                </div>
+                <div class="gift-box">
+                    <div class="gift-icon">💝</div>
+                    <h3 class="gift-title">My Hope</h3>
+                    <p class="gift-desc">The hope that maybe, just maybe, you feel something too.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LETTER SECTION -->
+        <section class="page-section letter-section" id="letterSection">
+            <div class="letter-container">
+                <div class="letter-header">
+                    <div class="letter-greeting">Dear Shajid,</div>
+                    <div class="letter-date">A confession after 3 years</div>
+                </div>
+
+                <div class="letter-body">
+                    <p>I've been writing this letter in my head for three years. Since class 12th, you've been living in my thoughts — uninvited, but so very welcome.</p>
+
+                    <p>Do you know what it feels like to control yourself so much that it hurts? I do. Every single day, I tell myself to just look away, to focus on something else, to pretend you don't exist. But the moment I see you nearby, all that control just... breaks.</p>
+
+                    <p>My eyes are not my own anymore, Shajid. They're always looking for you. They're always finding you in a crowded room. It doesn't matter how hard I try — they're drawn to you like moths to light.</p>
+
+                    <p>And when you're close to me? My heartbeats go crazy. Thump thump thump. So fast I think everyone can hear it. I have to control my breathing just to appear normal. My hands get cold, my mind goes blank, and all I can think about is you. Just you.</p>
+
+                    <p>But then there's this feeling I get when I'm around you — a peace that's unlike anything I've ever felt. It's like coming home. It's like all the chaos in my world suddenly makes sense. Like all the pieces fit together perfectly. I've never felt this way about anyone, no matter how hard I looked.</p>
+
+                    <div class="highlight-quote">
+                        "You are the kind of person that quietly becomes a favorite thought. My heart is not the easiest thing to give away, but somehow it has already chosen you."
+                    </div>
+
+                    <p>I've lived 3+ years of my life with this secret. I've spent so many nights thinking about what to say, how to say it, whether you could ever feel even a fraction of what I feel. And today, I couldn't keep it inside anymore.</p>
+
+                    <p>Shajid, I have had a crush on you for the past three years. And it's not just a silly crush — it's deep, real, and it grows with every passing day. You've become woven into every daydream, every hope, every future I imagine. When I think about happiness, I think about you. When I think about missing someone, it's your absence I feel.</p>
+
+                    <p>I don't know what you'll say. I don't know if you feel the same way. But I know that you deserve to know the truth. You deserve to know that someone looks at you the way I do — with admiration, affection, and a heart that's completely, helplessly yours.</p>
+
+                    <p>This is my courage. This is my vulnerability. This is the real me, standing before you without walls, without defenses, just honest and true.</p>
+
+                    <div class="letter-signature">
+                        <div class="signature-name">With all my heart,</div>
+                        <div class="signature-msg">Someone who sees you in everything ✨</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL QUESTION SECTION -->
+        <section class="page-section" id="finalSection" style="padding: 80px 20px;">
+            <div style="text-align: center;">
+                <h2 class="section-title">One Last Thing...</h2>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    I've said everything in my heart. Now comes the moment that terrifies me the most.
+                </p>
+                <button class="cta-button" onclick="showConfession()" style="margin-top: 30px;">
+                    The Final Question →
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONFESSION MODAL -->
+    <div class="confession-modal" id="confessionModal">
+        <div class="confession-card">
+            <div class="confession-emoji">💛</div>
+            <h2 class="confession-title">Will You Be Mine?</h2>
+            <p class="confession-subtitle">
+                Not just for today, but for all the days to come. Will you let me love you the way I've always wanted to?
+            </p>
+            <div class="button-group">
+                <button class="response-btn yes" onclick="respondYes()">
+                    Yes 💕
+                </button>
+                <button class="response-btn think" onclick="respondThink()">
+                    Let Me Think 🤔
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CELEBRATION CANVAS -->
+    <div class="celebration" id="celebration"></div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player">
+        <span class="music-icon">♪</span>
+        <button class="music-toggle" onclick="toggleMusic()" id="musicBtn">Play Music</button>
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-      function scrollToGift() {
-        document.getElementById('gift-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => {
-          document.getElementById('gift-section').classList.add('visible');
-        }, 200);
-      }
+        // ===== PAGE NAVIGATION =====
+        let currentPage = 0;
+        const pages = ['cover-section', 'giftsSection', 'letterSection', 'finalSection'];
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+        function getPageIndex(id) {
+            return pages.indexOf(id);
+        }
+
+        function showPage(index) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            if (pages[index]) {
+                document.getElementById(pages[index]).classList.add('active');
+                currentPage = index;
+                updateScrollIndicator();
+            }
+        }
+
+        function nextSection() {
+            if (currentPage < pages.length - 1) {
+                showPage(currentPage + 1);
+                scrollToTop();
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateScrollIndicator() {
+            const indicator = document.getElementById('scrollIndicator');
+            if (currentPage === 0) {
+                indicator.classList.remove('hidden');
+            } else {
+                indicator.classList.add('hidden');
+            }
+        }
+
+        // ===== PARTICLES BACKGROUND =====
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth > 768 ? 50 : 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.animation = `drift ${5 + Math.random() * 10}s linear infinite`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ===== MUSIC CONTROL =====
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let musicPlaying = false;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = 'Play Music';
+                musicPlaying = false;
+            } else {
+                bgMusic.play().catch(err => console.log('Audio play failed:', err));
+                musicBtn.textContent = 'Pause Music';
+                musicPlaying = true;
+            }
+        }
+
+        // ===== CONFESSION MODAL =====
+        function showConfession() {
+            document.getElementById('confessionModal').classList.add('active');
+            if (!musicPlaying) {
+                bgMusic.play().catch(err => console.log('Audio play failed:', err));
+                musicBtn.textContent = 'Pause Music';
+                musicPlaying = true;
+            }
+        }
+
+        function respondYes() {
+            celebrateSuccess();
+            setTimeout(() => {
+                alert('💕 This is the best day ever! I can\'t wait to spend every moment with you.');
+                document.getElementById('confessionModal').classList.remove('active');
+            }, 1500);
+        }
+
+        function respondThink() {
+            alert('💭 I understand. Take your time. My heart will wait for you. 💛');
+            document.getElementById('confessionModal').classList.remove('active');
+        }
+
+        // ===== CELEBRATION EFFECT =====
+        function celebrateSuccess() {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.add('active');
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = Math.random() > 0.5 ? '#d4af37' : '#e63946';
+                    celebration.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gift-box').forEach(box => observer.observe(box));
+
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSection();
+            }
         });
-      }, { threshold: 0.15 });
 
-      document.querySelectorAll('.section').forEach(section => observer.observe(section));
+        // ===== INITIALIZE =====
+        createParticles();
+        updateScrollIndicator();
 
-      function createHearts() {
-        const heartContainer = document.getElementById('floating-hearts');
-        const heartSymbols = ['❤', '♥', '❦', '♡'];
-
-        for (let i = 0; i < 22; i++) {
-          const heart = document.createElement('div');
-          heart.className = 'heart';
-          heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-          heart.style.left = Math.random() * 100 + 'vw';
-          heart.style.fontSize = (14 + Math.random() * 26) + 'px';
-          heart.style.animationDuration = (8 + Math.random() * 10) + 's';
-          heart.style.animationDelay = (Math.random() * 2) + 's';
-          heart.style.color = i % 2 === 0 ? 'rgba(247,215,123,0.85)' : 'rgba(255,111,166,0.8)';
-          heartContainer.appendChild(heart);
-        }
-      }
-
-      const music = document.getElementById('loveSong');
-      let isPlaying = false;
-
-      function toggleMusic() {
-        const btn = document.getElementById('musicBtn');
-        if (!isPlaying) {
-          music.play();
-          btn.textContent = 'Pause Music';
-          isPlaying = true;
-        } else {
-          music.pause();
-          btn.textContent = 'Play Soft Music';
-          isPlaying = false;
-        }
-      }
-
-      createHearts();
+        // Add CSS animation for drift
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes drift {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                25% { transform: translateY(-20px) rotate(5deg); }
+                50% { transform: translateY(-40px) rotate(-5deg); }
+                75% { transform: translateY(-20px) rotate(5deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
-  </body>
+</body>
 </html>
